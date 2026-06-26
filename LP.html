@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sam's Club — $750 Member Reward Program</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #1a1a1a; }
+
+.header { background: #0067a0; padding: 18px 20px; text-align: center; }
+.header-inner { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.club-icon { width: 40px; height: 40px; background: #ffc220; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1em; color: #1a1a1a; flex-shrink: 0; }
+.header h1 { color: white; font-size: 1.15em; font-weight: 700; text-align: left; line-height: 1.2; }
+.header h1 span { color: #ffc220; }
+
+.hero { background: white; padding: 28px 20px 24px; text-align: center; border-bottom: 3px solid #ffc220; }
+.hero-amount { font-size: 3em; font-weight: 900; color: #0067a0; line-height: 1; margin-bottom: 6px; }
+.hero-label { font-size: 1em; color: #333; font-weight: 600; margin-bottom: 10px; }
+.hero-sub { font-size: 0.88em; color: #666; line-height: 1.5; max-width: 380px; margin: 0 auto; }
+
+.container { max-width: 520px; margin: 0 auto; padding: 20px 16px; }
+
+.steps-card { background: white; border-radius: 10px; padding: 22px 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.steps-title { font-size: 0.8em; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 18px; font-weight: 600; }
+
+.step { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+.step:last-child { border-bottom: none; padding-bottom: 0; }
+.step:first-of-type { padding-top: 0; }
+.step-circle { width: 34px; height: 34px; background: #0067a0; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 0.9em; flex-shrink: 0; }
+.step-content { flex: 1; padding-top: 5px; }
+.step-content strong { display: block; font-size: 0.95em; color: #1a1a1a; margin-bottom: 3px; }
+.step-content span { font-size: 0.83em; color: #666; line-height: 1.4; }
+
+.highlight-box { background: #e8f4fd; border: 1px solid #b3d9f0; border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; font-size: 0.88em; color: #004d7a; line-height: 1.55; }
+.highlight-box strong { display: block; margin-bottom-4px; color: #003a5c; }
+
+.cta-wrap { margin-bottom: 16px; }
+.cta-btn { display: block; background: #ffc220; color: #1a1a1a; text-align: center; font-weight: 900; font-size: 1.2em; padding: 20px; border-radius: 8px; text-decoration: none; letter-spacing: 0.2px; box-shadow: 0 4px 16px rgba(255,194,32,0.45); transition: background 0.2s, transform 0.1s; }
+.cta-btn:active { transform: scale(0.98); }
+.cta-btn:hover { background: #e6ae00; }
+
+.avail { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.8em; color: #444; margin-bottom: 20px; }
+.dot { width: 8px; height: 8px; background: #4caf50; border-radius: 50%; animation: blink 1.4s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+
+.faq { background: white; border-radius: 10px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.faq-title { font-size: 0.8em; text-transform: uppercase; letter-spacing: 1.5px; color: #888; font-weight: 600; padding: 18px 20px 10px; }
+.faq-item { border-top: 1px solid #f0f0f0; padding: 14px 20px; cursor: pointer; }
+.faq-q { font-size: 0.9em; font-weight: 600; color: #1a1a1a; display: flex; justify-content: space-between; align-items: center; }
+.faq-q::after { content: '+'; font-size: 1.2em; color: #0067a0; font-weight: 300; }
+.faq-a { font-size: 0.83em; color: #555; line-height: 1.55; margin-top: 8px; display: none; }
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-item.open .faq-a { display: block; }
+
+.trust { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
+.trust-item { text-align: center; font-size: 0.75em; color: #666; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.trust-icon { font-size: 1.4em; }
+
+footer { text-align: center; font-size: 0.7em; color: #aaa; line-height: 1.7; padding: 0 16px 40px; }
+
+@media (min-width: 700px) {
+  .hero-amount { font-size: 4em; }
+  .hero-label { font-size: 1.2em; }
+  .hero-sub { font-size: 1em; }
+  .container { max-width: 640px; padding: 28px 20px; }
+  .step-content strong { font-size: 1.02em; }
+  .step-content span { font-size: 0.92em; }
+  .cta-btn { font-size: 1.3em; padding: 22px; }
+  .faq-q { font-size: 0.97em; }
+  .faq-a { font-size: 0.9em; }
+  .highlight-box { font-size: 0.95em; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="club-icon">S+</div>
+    <h1>Sam's Club<br><span>Member Reward Program</span></h1>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-amount">$750</div>
+  <div class="hero-label">Towards Sam's Club</div>
+  <div class="hero-sub">Complete the required deals below to earn your reward. Simply follow the steps to qualify.</div>
+</div>
+
+<div class="container">
+
+  <div class="steps-card">
+    <div class="steps-title">Steps Required</div>
+
+    <div class="step">
+      <div class="step-circle">1</div>
+      <div class="step-content">
+        <strong>Get Started</strong>
+        <span>Click the button below and enter your email and basic information to enroll</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-circle">2</div>
+      <div class="step-content">
+        <strong>Complete Your Required Deals</strong>
+        <span>Finish 4 to 5 recommended partner deals to qualify for the reward</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-circle">3</div>
+      <div class="step-content">
+        <strong>Earn Your Reward</strong>
+        <span>Once requirements are met your $750 reward is delivered to your email</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="highlight-box">
+    <strong>Important — Complete all required deals</strong>
+    You must finish all required partner deals to qualify for the reward. Partially completing the steps will not result in a reward being issued. Make sure to complete every deal before closing the page.
+  </div>
+
+  <div class="avail">
+    <span class="dot"></span>
+    <span>Program currently active — limited spots remaining today</span>
+  </div>
+
+  <div class="cta-wrap">
+    <a href="https://trksy.org/aff_c?offer_id=4592&aff_id=167172" class="cta-btn">Get Started Now →</a>
+  </div>
+
+  <div class="trust">
+    <div class="trust-item">
+      <span class="trust-icon">🔒</span>
+      <span>Secure<br>Registration</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">✅</span>
+      <span>No Purchase<br>Required</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">🇺🇸</span>
+      <span>US Residents<br>Only</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">⚡</span>
+      <span>2 Minutes<br>To Start</span>
+    </div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-title">Frequently Asked Questions</div>
+    <div class="faq-item">
+      <div class="faq-q">How many deals do I need to complete?</div>
+      <div class="faq-a">You need to complete 4 to 5 recommended partner deals. All deals must be completed to qualify for the reward. You will see the full list after registering.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How long does the process take?</div>
+      <div class="faq-a">Registration takes about 2 minutes. Completing all required deals typically takes 10 to 20 minutes depending on the deals available to you.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What kind of deals are involved?</div>
+      <div class="faq-a">The required deals are from program partners and vary by participant. You will see your specific deals after completing registration.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">When will I receive my reward?</div>
+      <div class="faq-a">Your reward is delivered to your email once all required deals have been verified and completed. Make sure to complete every step before closing your browser.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Promotional Program. Not affiliated with Sam's Club or Walmart Inc.<br>
+  Reward is earned after completing all required program deals. US residents only. Program availability may vary.
+</footer>
+
+<script>
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  item.addEventListener('click', function() {
+    this.classList.toggle('open');
+  });
+});
+</script>
+
+</body>
+</html>
