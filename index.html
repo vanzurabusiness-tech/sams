@@ -83,14 +83,26 @@ footer { margin-top: 60px; font-size: 0.8em; color: #999; border-top: 1px solid 
   }
 
   function getGeo(callback) {
-    try {
-      fetch('https://ip-api.com/json/?fields=countryCode', { timeout: 3000 })
-        .then(function(r) { return r.json(); })
-        .then(function(data) { callback(data.countryCode); })
-        .catch(function() { callback('US'); });
-    } catch(e) {
-      callback('US');
-    }
+    var done = false;
+    var timer = setTimeout(function() {
+      if (!done) { done = true; callback('US'); }
+    }, 3000);
+
+    fetch('https://ipapi.co/country/')
+      .then(function(r) { return r.text(); })
+      .then(function(country) {
+        if (!done) { done = true; clearTimeout(timer); callback(country.trim()); }
+      })
+      .catch(function() {
+        fetch('https://ip-api.com/json/?fields=countryCode')
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (!done) { done = true; clearTimeout(timer); callback(data.countryCode); }
+          })
+          .catch(function() {
+            if (!done) { done = true; clearTimeout(timer); callback('US'); }
+          });
+      });
   }
 
   function isMobile() {
